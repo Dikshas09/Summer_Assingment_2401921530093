@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int n = height.size();
+        int ht , wd , area , ans = 0;
+        int lp = 0,rp = n - 1;
+        while(lp<rp){
+            wd = rp - lp ;
+            ht = min(height[lp] , height[rp]) ;
+            area = wd * ht ;
+            ans = max(area , ans) ;
+            if(height[lp] < height[rp]) { 
+                lp ++ ; 
+            }
+            else { 
+                rp -- ; 
+            }
+        }
+        return ans;
+    }
+};
