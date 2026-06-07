@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class libraryUser {
+    public:
+        virtual void registerAccount(){}
+        virtual void requestbook(){}
+        virtual ~libraryUser() {
+            cout << "Destructor called" << endl;
+        }
+};
+class kidUser : public libraryUser {
+    public:
+        int age;
+        string bookType;
+    public:
+        void registerAccount() override{
+            if (age < 12) {
+                cout << "You have successfully registered under a Kids Account" << endl;
+            } else {
+                cout << "Sorry, Age must be less than 12 to register as a kid" << endl;
+            }
+        }
+        void requestbook() {
+            if (bookType == "Kids") {
+                cout << "Book Issued successfully, please return the book within 10 days" << endl;
+            } else {
+                cout << "Oops, you are allowed to take only kids books" << endl;
+            }
+        }
+};
+class adultUser : public libraryUser {
+    public:
+        int age;
+        string bookType;
+    public:
+        void registerAccount() override{
+            if (age > 12) {
+                cout << "You have successfully registered under an Adult Account" << endl;
+            } else {
+                cout << "Sorry, Age must be greater than 12 to register as an adult" << endl;
+            }
+        }
+        void requestbook() override{
+            if (bookType == "Fiction") {
+                cout << "Book Issued successfully, please return the book within 7 days" << endl;
+            } else {
+                cout << "Oops, you are allowed to take only adult Fiction books" << endl;
+            }
+        }
+};
+int main() {
+    cout<<"......Running the test case for KidUser............."<<endl;
+    kidUser kid;
+    kid.age = 10;
+    cout<<"Testing with age 10............."<<endl;
+    kid.registerAccount();
+    kid.age = 18;
+    cout<<"Testing with age 18............."<<endl;
+    kid.registerAccount();
+    kid.bookType = "Kids";
+    cout<<"Testing with book type Kids............"<<endl;
+    kid.requestbook();
+    kid.bookType = "Fiction";
+    cout<<"Testing with book type Fiction.........."<<endl;
+    kid.requestbook();
+    cout<<"\n................Running the test case for AdultUser..............."<<endl;
+    adultUser adult;
+    adult.age = 5;
+    cout<<"Testing with age 5............."<<endl;
+    adult.registerAccount();
+    adult.age = 23;
+    cout<<"Testing with age 23............."<<endl;
+    adult.registerAccount();
+    adult.bookType = "Kids";
+    cout<<"Testing with book type Kids............."<<endl;
+    adult.requestbook();
+    adult.bookType = "Fiction";
+    cout<<"Testing with book type Fiction............."<<endl;
+    adult.requestbook();
+    return 0;
+}
